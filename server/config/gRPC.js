@@ -1,8 +1,13 @@
 import grpc from "@grpc/grpc-js";
 import protoLoader from "@grpc/proto-loader";
 import path from "path";
+import dotenv from 'dotenv';
 
-const PROTO_PATH = path.join('../proto/questions.proto');
+// Load environment variables
+dotenv.config();
+
+// Resolve the path to the proto file
+const PROTO_PATH = path.resolve('../proto/questions.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,
@@ -22,15 +27,17 @@ function startGrpcServer(grpcMethods) {
     ...grpcMethods,
   });
 
+  const port = process.env.PORT || "50051";  // Use a default port if not set
+
   server.bindAsync(
-    "0.0.0.0:" + process.env.PORT,
+    `0.0.0.0:${port}`,
     grpc.ServerCredentials.createInsecure(),
-    (error, port) => {
+    (error, boundPort) => {
       if (error) {
-        console.error(error);
+        console.error("Error binding gRPC server:", error);
         return;
       }
-      console.log(`Server running at http://0.0.0.0:${port}`);
+      console.log(`Server running at http://0.0.0.0:${boundPort}`);
     }
   );
 }
