@@ -1,20 +1,32 @@
 {
   "name": "speakx-server",
   "version": "1.0.0",
+  "description": "SpeakX server application",
   "main": "index.js",
   "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node seed/index.js"
+  },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.0",
     "@grpc/proto-loader": "^0.7.0",
     "dotenv": "^16.4.7",
     "mongoose": "^8.9.5"
   },
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "seed": "node seed/index.js"
-  },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "grpc",
+    "server",
+    "mongodb",
+    "speakx"
+  ],
+  "author": "Sumant Kumar",
+  "license": "MIT"
 }
