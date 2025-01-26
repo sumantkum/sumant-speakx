@@ -27,7 +27,7 @@ function startGrpcServer(grpcMethods) {
     ...grpcMethods,
   });
 
-  const port = process.env.PORT || "50052";  // Use a default port if not set
+  const port = process.env.PORT || "50506";  // Use a default port if not set
 
   server.bindAsync(
     `0.0.0.0:${port}`,
